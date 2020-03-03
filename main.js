@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Wait till the browser is ready to render the game (avoids glitches)
-    window.requestAnimationFrame(function () {
-      let manager = new GameManager(4, KeyboardInputManager, HTMLActuator);
-    });
+      new GameManager(4, KeyboardInputManager, HTMLActuator);
   });
   
-  function GameManager(size, InputManager, Actuator) {
+function GameManager(size, InputManager, Actuator) {
     this.size         = size; // Size of the grid
-    this.inputManager = new InputManager;
-    this.actuator     = new Actuator;
+    this.inputManager = new InputManager();
+    this.actuator     = new Actuator();
   
     this.startTiles   = 2;
   
@@ -229,8 +227,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return first.x === second.x && first.y === second.y;
   };
   
-  
-  
   function Grid(size) {
     this.size = size;
   
@@ -241,12 +237,10 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Build a grid of the specified size
   Grid.prototype.build = function () {
-    for (var x = 0; x < this.size; x++) {
-      var row = this.cells[x] = [];
-  
-      for (var y = 0; y < this.size; y++) {
-        row.push(null);
-      }
+    for (let x = 0; x < this.size; x++) {
+      this.cells[x] = [];
+      for (let y = 0; y < this.size; y++) 
+        this.cells[x].push(null);
     }
   };
   
@@ -273,8 +267,8 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Call callback for every cell
   Grid.prototype.eachCell = function (callback) {
-    for (var x = 0; x < this.size; x++) {
-      for (var y = 0; y < this.size; y++) {
+    for (let x = 0; x < this.size; x++) {
+      for (let y = 0; y < this.size; y++) {
         callback(x, y, this.cells[x][y]);
       }
     }
@@ -282,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Check if there are any cells available
   Grid.prototype.cellsAvailable = function () {
-    return !!this.availableCells().length;
+    return this.availableCells().length;
   };
   
   // Check if the specified cell is taken
@@ -291,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   
   Grid.prototype.cellOccupied = function (cell) {
-    return !!this.cellContent(cell);
+    return this.cellContent(cell);
   };
   
   Grid.prototype.cellContent = function (cell) {
