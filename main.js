@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Wait till the browser is ready to render the game (avoids glitches)
     window.requestAnimationFrame(function () {
-      var manager = new GameManager(4, KeyboardInputManager, HTMLActuator);
+      let manager = new GameManager(4, KeyboardInputManager, HTMLActuator);
     });
   });
-  
   
   function GameManager(size, InputManager, Actuator) {
     this.size         = size; // Size of the grid
@@ -315,14 +314,12 @@ document.addEventListener("DOMContentLoaded", function () {
   Grid.prototype.withinBounds = function (position) {
     return position.x >= 0 && position.x < this.size &&
            position.y >= 0 && position.y < this.size;
-  };
-  
+  }; 
   
   function HTMLActuator() {
     this.tileContainer    = document.getElementsByClassName("tile-container")[0];
     this.scoreContainer   = document.getElementsByClassName("score-container")[0];
     this.messageContainer = document.getElementsByClassName("game-message")[0];
-  
     this.score = 0;
   }
   
@@ -455,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function () {
   KeyboardInputManager.prototype.emit = function (event, data) {
     var callbacks = this.events[event];
     if (callbacks) {
-      callbacks.forEach(function (callback) {
+      callbacks.forEach((callback) => {
         callback(data);
       });
     }

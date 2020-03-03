@@ -94,9 +94,13 @@ body {
   margin: 80px 0;
 }
 
+.heading {
+  display: flex;
+  justify-content: space-between;
+}
+
 .heading:after {
   content: "";
-  display: block;
   clear: both;
 }
 
@@ -104,8 +108,6 @@ h1.title {
   font-size: 80px;
   font-weight: bold;
   margin: 0;
-  display: block;
-  float: left;
 }
 
 @include keyframes(move-up) {
@@ -124,7 +126,6 @@ h1.title {
   $height: 25px;
 
   position: relative;
-  float: right;
   background: $game-container-background;
   padding: 15px 25px;
   font-size: $height;
@@ -284,6 +285,7 @@ hr {
   }
 
   .grid-row {
+    display: flex;
     margin-bottom: $grid-spacing;
 
     &:last-child {
@@ -301,7 +303,6 @@ hr {
     width: $tile-size;
     height: $tile-size;
     margin-right: $grid-spacing;
-    float: left;
 
     border-radius: $tile-border-radius;
 
@@ -503,6 +504,7 @@ hr {
   }
 
   .heading {
+
     margin-bottom: 10px;
   }
 
